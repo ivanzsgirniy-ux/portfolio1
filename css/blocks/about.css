@@ -1,0 +1,100 @@
+.about {
+    margin-bottom: 30px;
+}
+
+.progress-bar {
+    height: 10px;
+    background: #dfe7f8;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 10px;
+    transition: width 1s ease;
+}
+
+.title-h2 {
+    margin: 32px 0;
+    padding: 0;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 24px;
+}
+
+.about__title {
+    text-align: center;
+}
+
+.about__wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.about-info {
+    max-width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.skills {
+    background-color: #c9d0e7;
+    border-radius: 10px;
+    padding: 10px;
+    min-width: 55%;
+    border: #a9b2da solid 1px;
+}
+
+.skills__title {
+    margin: 0 0 25px;
+    padding: 15px 0 0 ;
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.skill-item__title {
+    margin:10px 0;
+    padding: 0;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.about-info__text {
+    margin: 0 0 20px;
+    padding: 0;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.about-info__blockquote {
+
+    margin: 0;
+    padding: 8px 14px;
+    text-align: right;
+    background-color: #c9d0e7;
+    border: #a9b2da solid 1px;
+    border-radius: 14px;
+}
+
+@media (max-width: 768px) {
+    .about__wrapper {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .about-info {
+        max-width: 100%;
+    }
+    .skills{
+        min-width: 100%;
+    }
+}

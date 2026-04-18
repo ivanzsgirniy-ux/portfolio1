@@ -1,0 +1,11 @@
+/* Глобальные стили */
+@import './global/container.css';
+@import './global/reboot.css';
+
+/* Стилизация блоков */
+@import './blocks/header.css';
+@import './blocks/greetings.css';
+@import './blocks/about.css';
+@import './blocks/feedback.css';
+@import './blocks/portfolio.css';
+@import './blocks/feedback.css';

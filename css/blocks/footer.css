@@ -1,0 +1,15 @@
+.footer {
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 40px;
+}
+
+.footer__text {
+    text-align: center;
+}
+
+.footer-motto {
+    font-size: 12px;
+    margin-top: 10px;
+    opacity: 0.8;
+}
