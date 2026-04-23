@@ -41,16 +41,48 @@ input:focus, textarea:focus {
 .submit-btn {
     justify-content: center;
     cursor: pointer;
-    border: none;
-    color: #dfe7f8;
+    margin: 0;
+    padding: 12px 0;
+    font-weight: 800;
     font-size: 16px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
-    padding: 8px 14px;
-    border-radius: 12px;
+    border: #667eea solid 3px;
+    border-radius: 16px;
+    transition: all 0.5s ease;
+    width: 100%;
+    text-align: center;
+    background: transparent;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    transition: width 0.6s ease;
+    z-index: -1;
+}
+
+.submit-btn:hover::before {
+    width: 100%;
 }
 
 .submit-btn:hover {
-    transform: scale(1.1);
+    color: #f5f6fa;
+    border-color: transparent;
+    transition: border-color 0.3s ease, color 0.5s ease;
+}
+
+.submit-btn:active {
+    filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5))
+            drop-shadow(0 0 20px rgba(118, 75, 162, 0.5));
+    transition: filter 0.1s ease;
 }
 
 .form-feedback {

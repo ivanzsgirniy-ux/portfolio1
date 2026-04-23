@@ -1,6 +1,7 @@
 /* Глобальные стили */
 @import './global/container.css';
 @import './global/reboot.css';
+@import './global/dakt-theme.css';
 
 /* Стилизация блоков */
 @import './blocks/header.css';

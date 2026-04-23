@@ -1,0 +1,231 @@
+/* ===== ТЕМНАЯ ТЕМА ===== */
+body.dark-mode {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #e0e0e0;
+}
+
+/* Контейнеры */
+body.dark-mode .container {
+    background: #1e2a3a;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+/* Иконки в хедере */
+body.dark-mode .icon-color {
+    fill: #cbd5e6;
+}
+
+/* Секция навыков */
+body.dark-mode .skills {
+    background-color: #0f2c3b;
+    border-color: #2c4c6e;
+}
+
+/* Цитата */
+body.dark-mode .about-info__blockquote {
+    background-color: #0f2c3b;
+    border-color: #2c4c6e;
+}
+
+/* Карточки проектов */
+body.dark-mode .project-card {
+    background: #1f2f3e;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+body.dark-mode .project-desc {
+    color: #b2bec3;
+}
+
+body.dark-mode .project-link {
+    background: #0f2c3b;
+    border-color: #7f8cfa;
+    color: #cbd5e6;
+}
+
+/* Исправление: рамка у project-link при наведении */
+body.dark-mode .project-link:hover {
+    border-color: transparent;
+    color: white;
+}
+
+body.dark-mode .tech-tag {
+    background: #2c3e50;
+    color: #ecf0f1;
+}
+
+/* Карточка обратной связи */
+body.dark-mode .contact-card {
+    background: #1e2a36;
+    box-shadow: 0 20px 30px rgba(0,0,0,0.4);
+}
+
+/* Поля ввода */
+body.dark-mode input,
+body.dark-mode textarea {
+    background: #2d3e4e;
+    border-color: #405d74;
+    color: #e0e0e0;
+}
+
+/* Исправление: кнопка отправки */
+body.dark-mode .submit-btn {
+    color: #e0e0e0;
+    border-color: #7f8cfa;
+}
+
+body.dark-mode .submit-btn:hover {
+    color: white;
+    border-color: transparent;
+}
+
+/* Социальные иконки (оставляем как есть, они яркие) */
+
+/* Текст в футере */
+body.dark-mode .footer__text,
+body.dark-mode .footer-motto {
+    color: #cbd5e6;
+}
+
+/* Навигационные ссылки */
+body.dark-mode .header-nav__link {
+    color: #cbd5e6;
+}
+
+/* Контакты в хедере */
+body.dark-mode .header-contacts__link-text {
+    color: #cbd5e6;
+}
+
+/* Приветственный текст */
+body.dark-mode .greetings__text {
+    color: #cbd5e6;
+}
+
+/* Исправление: ссылки в приветственной секции */
+body.dark-mode .greetings__link {
+    border-color: #cbd5e6;
+    color: #cbd5e6;
+}
+
+body.dark-mode .greetings__link:hover {
+    color: #1e2a3a;
+    border-color: transparent;
+}
+
+/* Заголовки секций */
+body.dark-mode .title-h2 {
+    color: #e0e0e0;
+}
+
+body.dark-mode .portfolio__text {
+    color: #b2bec3;
+}
+
+/* Текст "Обо мне" */
+body.dark-mode .about-info__text {
+    color: #e0e0e0;
+}
+
+/* Заголовки навыков */
+body.dark-mode .skills__title,
+body.dark-mode .skill-item__title {
+    color: #e0e0e0;
+}
+
+/* Прогресс-бар оставляем с градиентом, он и так яркий */
+
+/* Социальные ссылки в блоке обратной связи */
+body.dark-mode .social-links h3 {
+    color: #e0e0e0;
+}
+
+/* ===== КНОПКА ПЕРЕКЛЮЧЕНИЯ ТЕМЫ (липкая) ===== */
+.theme-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #ffffff, #e6e9f0);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.08);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.3);
+}
+
+.theme-toggle i {
+    font-size: 28px;
+    color: #333e52;
+    transition: 0.2s;
+}
+
+/* Темная тема для кнопки */
+body.dark-mode .theme-toggle {
+    background: linear-gradient(145deg, #1f2a3c, #141c28);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+}
+
+body.dark-mode .theme-toggle i {
+    color: #ffdd77;
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 600px) {
+    .theme-toggle {
+        bottom: 20px;
+        right: 20px;
+        width: 48px;
+        height: 48px;
+    }
+    .theme-toggle i {
+        font-size: 24px;
+    }
+}
+
+/* ===== ПЛАВНЫЙ ПЕРЕХОД ДЛЯ ТЕМНОЙ ТЕМЫ ===== */
+/* Плавное изменение всех элементов при смене темы */
+body,
+body * {
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                fill 0.3s ease;
+}
+
+/* Отдельно для псевдоэлементов (они не наследуют transition) */
+.project-link::before,
+.submit-btn::before,
+.greetings__link::before {
+    transition: width 0.6s ease, background 0.3s ease;
+}
+
+/* Для карточек и блоков с transform */
+.project-card {
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Для кнопки переключения темы */
+.theme-toggle {
+    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+.theme-toggle i {
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+/* Плавное появление иконки при переключении */
+.theme-toggle i {
+    transition: all 0.3s ease;
+}

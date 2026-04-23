@@ -51,29 +51,104 @@
     flex-direction: row;
     gap: 20px;
     justify-content: center;
+    width: 400px;
 }
 
 .greetings__link {
     margin: 0;
-    padding: 8px 16px;
-    font-weight: 600;
+    padding: 12px 0;
+    font-weight: 800;
     font-size: 16px;
-    background-color: #dfe7f8;
+    border: #dfe7f8 solid 3px;
+    border-radius: 16px;
+    transition: all 0.5s ease;
+    width: 100%;
+    text-align: center;
+    color: #dfe7f8;
+    background: transparent;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.greetings__link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
     border-radius: 14px;
-    transition: 0.2s;
+    background: linear-gradient(135deg, #dfe7f8 0%, #addeeb 100%);
+    transition: width 0.6s ease;
+    z-index: -1;
+}
+
+.greetings__link:hover::before {
+    width: 100%;
 }
 
 .greetings__link:hover {
-    transform: scale(1.1);
-    opacity: 0.9;
+    color: #333e52;
+    border-color: transparent;
+    transition: border-color 0.3s ease;
+}
+
+/* Контейнер для иконки */
+.icon-container {
+    display: inline-block;
+    padding: 20px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .greetings__link:active {
-    opacity: 0.5;
+    filter: drop-shadow(0 0 20px rgba(173, 222, 235, 0.5));
+    transition: filter 0.1s ease;
 }
 
-.greetings__link--feedback {
-    background-color: #addeeb;
+/* Иконка */
+.greetings-icon {
+    display: block;
+    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(0 0 5px rgba(223, 231, 248, 0.3));
+}
+
+/* Эффекты при наведении */
+.icon-container:hover .greetings-icon {
+    /* Анимация перелива градиента */
+    animation: gradientShift 2s ease infinite;
+    
+    /* Осветление/свечение вокруг */
+    filter: drop-shadow(0 0 20px rgba(173, 222, 235, 0.8))
+           drop-shadow(0 0 40px rgba(223, 231, 248, 0.5));
+    
+    transform: scale(1.05);
+}
+
+/* Свечение вокруг контейнера (осветление фона) */
+.icon-container:hover {
+    background: radial-gradient(
+        circle at center,
+        rgba(173, 222, 235, 0.25) 0%,
+        rgba(223, 231, 248, 0.15) 50%,
+        transparent 80%
+    );
+    box-shadow: 0 0 30px rgba(173, 222, 235, 0.3);
+}
+
+/* Анимация перелива градиента */
+@keyframes gradientShift {
+    0% {
+        filter: drop-shadow(0 0 5px rgba(223, 231, 248, 0.3));
+    }
+    50% {
+        filter: drop-shadow(0 0 15px rgba(173, 222, 235, 0.7));
+    }
+    100% {
+        filter: drop-shadow(0 0 5px rgba(223, 231, 248, 0.3));
+    }
 }
 
 @media (max-width: 768px) {
@@ -82,6 +157,12 @@
     }
     .title {
         line-height: 55px;
+    }
+
+    .greetings__links-wrap {
+        max-width: 350px;
+        display: flex;
+        flex-wrap: wrap;
     }
 }
 
@@ -98,5 +179,9 @@
     }
     .greetings__links-wrap {
         flex-direction: column;
+        max-width: 150px;
+    }
+    .greetings__link{
+        padding: 12px 8px;
     }
 }

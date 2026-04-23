@@ -119,3 +119,46 @@ const yearSpan = document.getElementById('currentYear');
 if(yearSpan) {
     yearSpan.textContent = new Date().getFullYear();
 }
+
+// ===== ТЕМНАЯ ТЕМА =====
+(function() {
+    // Создаем кнопку переключения темы
+    const themeToggle = document.createElement('div');
+    themeToggle.className = 'theme-toggle';
+    themeToggle.setAttribute('aria-label', 'Сменить тему');
+    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    document.body.appendChild(themeToggle);
+    
+    const icon = themeToggle.querySelector('i');
+    
+    // Функция установки темы
+    function setTheme(theme) {
+        if (theme === 'dark') {
+            document.body.classList.add('dark-mode');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        } else {
+            document.body.classList.remove('dark-mode');
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+        }
+        localStorage.setItem('portfolioTheme', theme);
+    }
+    
+    // Проверяем сохраненную тему
+    const savedTheme = localStorage.getItem('portfolioTheme');
+    if (savedTheme === 'dark') {
+        setTheme('dark');
+    } else {
+        setTheme('light');
+    }
+    
+    // Обработчик клика по кнопке
+    themeToggle.addEventListener('click', () => {
+        if (document.body.classList.contains('dark-mode')) {
+            setTheme('light');
+        } else {
+            setTheme('dark');
+        }
+    });
+})();

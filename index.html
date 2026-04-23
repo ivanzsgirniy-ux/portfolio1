@@ -61,22 +61,24 @@
         </div>
     </header>
     <main>
-        <section class="greetings  container" id="greetings">
+        <section class="greetings  container-greet" id="greetings">
             <div class="greetings__wrapper">
                 <div class="greetings__text-block">
                     <h1 class="title">Привет, я Иван!</h1>
                     <p class="greetings__text">Начинающий фронтенд-разработчик, который <b>очень&nbsp;старается</b></p>
                 </div>
                 <div class="greetings__items">
-                    <svg class="greetings-icon" width="200px" height="200px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="codeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#dfe7f8"/>
-                                <stop offset="100%" stop-color="#addeeb"/>
-                            </linearGradient>
-                        </defs>
-                        <path  d="M15.5 15L18.5 12L15.5 9M8.5 9L5.5 12L8.5 15M13 7L11 17M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="url(#codeGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <div class="icon-container">
+                        <svg class="greetings-icon" width="200px" height="200px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="codeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#dfe7f8"/>
+                                    <stop offset="100%" stop-color="#addeeb"/>
+                                </linearGradient>
+                            </defs>
+                            <path  d="M15.5 15L18.5 12L15.5 9M8.5 9L5.5 12L8.5 15M13 7L11 17M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="url(#codeGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
                     <div class="greetings__links-wrap">
                         <a class="greetings__link greetings__link--portfolio" href="#portfolio">Мои работы</a>
                         <a class="greetings__link greetings__link--feedback" href="#feedback">Связаться со мной</a>
@@ -160,6 +162,10 @@
         <p class="footer__text">© <span id="currentYear"></span> Загирный Иван — мой первый сайт, но не последний!</p>
         <p class="footer-motto">Сделано с усердием...<br>...и чашкой кофе</p>
     </footer>
+     <!-- ЛИПКАЯ КНОПКА ТЕМНОЙ ТЕМЫ -->
+    <div class="theme-toggle" id="darkModeToggle" aria-label="Сменить тему">
+        <i class="fas fa-moon"></i>
+    </div>
     <script src="./script.js"></script>
 </body>
 </html>

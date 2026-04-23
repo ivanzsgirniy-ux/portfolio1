@@ -7,8 +7,37 @@
     border-radius: 10px;
 }
 
+@media (max-width: 768px) {
+    .container {
+        margin: 0 10px;
+    }
+}
+
 @media (max-width: 375px) {
     .container {
         padding: 15px;
+        margin: 0 10px;
+    }
+}
+
+.container-greet {
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+    padding: 10px 64px;
+    background: #dfe7f8;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .container-greet {
+        margin: 0 10px;
+    }
+}
+
+@media (max-width: 375px) {
+    .container-greet {
+        padding: 15px;
+        margin: 0 10px;
     }
 }
