@@ -26,7 +26,7 @@ animateProgress();
 const projectsData = [
     {
         title: "Todo-лист на чистом JS",
-        desc: "Мой первый рабочий проект. Добавление, удаление задач, сохранение в localStorage. Горжусь им!",
+        desc: "Мой первый рабочий проект. Добавление, удаление задач, сохранение в localStorage.",
         tech: ["HTML", "CSS", "JS"],
         link: "GitHub",
         linkHref: "https://github.com/ivanzsgirniy-ux/ToDo-List",
@@ -50,7 +50,7 @@ const projectsData = [
     },
     {
         title: "Сайт-визитка (этот сайт)",
-        desc: "Сделал сам, с нуля. Первый полноценный проект с адаптивом и тёмной темой.",
+        desc: "Адаптив под мобильные устройства и планшеты, темная тема и рабочая форма обратной связи",
         tech: ["HTML/CSS", "JS", "Async/JS"],
         link: "GitHub",
         linkHref: "https://github.com/ivanzsgirniy-ux/portfolio1",
