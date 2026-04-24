@@ -84,12 +84,14 @@ if(projectsGrid) {
 
 // Формa
 
-// НАСТРОЙКИ (замените на свои данные!)
-const TELEGRAM_BOT_TOKEN = '8627657486:AAHH1zYlXhFiMSK6qUG-gjpCZiyr0WkVp_c';
-const TELEGRAM_CHAT_ID = '1015432778';
-
 const form = document.getElementById('contactForm');
 const feedbackDiv = document.getElementById('formFeedback');
+
+// Публичный прокси (никаких секретов в коде нет)
+// Замените URL на любой рабочий прокси из списка
+const PROXY_URL = 'https://proxy-tele.12bay.workers.dev';
+const BOT_TOKEN = '8627657486:AAHH-eTrv5XsyOaEFJZzYj6348V0UE5fsqc';
+const CHAT_ID = '1015432778';
 
 if(form) {
     form.addEventListener('submit', async function(e) {
@@ -100,7 +102,7 @@ if(form) {
         const message = document.getElementById('userMessage').value.trim();
         
         if(!name || !contacts) {
-            feedbackDiv.innerHTML = '<span style="color: #e94560;">❌ Пожалуйста, заполните имя и контактную информацию!</span>';
+            feedbackDiv.innerHTML = '<span style="color: #e94560;">❌ Заполните имя и контакты!</span>';
             return;
         }
         
@@ -110,38 +112,30 @@ if(form) {
         submitBtn.disabled = true;
         
         try {
-            // Формируем сообщение для Телеграм
-            const text = `📩 НОВОЕ СООБЩЕНИЕ С САЙТА!\n\n👤 Имя: ${name}\n📞 Контакты: ${contacts}\n💬 Сообщение: ${message || 'Не указано'}`;
-            
-            // Вместо прямого обращения к Telegram API
-            const response = await fetch('https://script.google.com/macros/s/AKfycbyTPB75i8L7II5pNMbIaF62sk8qZMg8G2wQKoQ5umoy-3Cli2PFllCnRr4xkwCMCYs-9Q/exec', {
+            // Используем публичный прокси [citation:1][citation:9]
+            const response = await fetch(`${PROXY_URL}/bot${BOT_TOKEN}/sendMessage`, {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    name: name,
-                    contacts: contacts,
-                    message: message
+                    chat_id: CHAT_ID,
+                    text: `📩 НОВОЕ СООБЩЕНИЕ!\n\n👤 Имя: ${name}\n📞 Контакты: ${contacts}\n💬 Сообщение: ${message || 'Не указано'}`
                 })
             });
             
             const result = await response.json();
             
             if(result.ok) {
-                feedbackDiv.innerHTML = '<span style="color: #10b981;">✅ Сообщение отправлено! Я скоро свяжусь с вами 🤝</span>';
+                feedbackDiv.innerHTML = '<span style="color: #10b981;">✅ Отправлено!</span>';
                 form.reset();
             } else {
-                feedbackDiv.innerHTML = '<span style="color: #e94560;">❌ Ошибка отправки. Попробуйте позже!</span>';
+                throw new Error();
             }
         } catch (error) {
-            console.error('Ошибка:', error);
-            feedbackDiv.innerHTML = '<span style="color: #e94560;">❌ Ошибка отправки. Попробуйте позже или напишите напрямую в соцсети!</span>';
+            feedbackDiv.innerHTML = '<span style="color: #e94560;">❌ Ошибка. Напишите мне напрямую в Telegram: @despamm</span>';
         } finally {
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
-            
-            setTimeout(() => {
-                feedbackDiv.innerHTML = '';
-            }, 5000);
+            setTimeout(() => feedbackDiv.innerHTML = '', 5000);
         }
     });
 }

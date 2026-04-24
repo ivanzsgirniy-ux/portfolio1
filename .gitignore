@@ -1,0 +1,16 @@
+# Секреты и токены
+.env
+*.env
+config.js
+.secrets
+*.key
+*.pem
+
+# Файлы с чувствительными данными
+secrets.json
+credentials.json
+
+# Логи и временные файлы
+*.log
+.DS_Store
+node_modules/
