@@ -113,16 +113,14 @@ if(form) {
             // Формируем сообщение для Телеграм
             const text = `📩 НОВОЕ СООБЩЕНИЕ С САЙТА!\n\n👤 Имя: ${name}\n📞 Контакты: ${contacts}\n💬 Сообщение: ${message || 'Не указано'}`;
             
-            // Отправляем в Телеграм (без бэкенда!)
-            const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            // Вместо прямого обращения к Telegram API
+            const response = await fetch('https://script.google.com/macros/s/AKfycbyTPB75i8L7II5pNMbIaF62sk8qZMg8G2wQKoQ5umoy-3Cli2PFllCnRr4xkwCMCYs-9Q/exec', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    chat_id: TELEGRAM_CHAT_ID,
-                    text: text,
-                    parse_mode: 'HTML'
+                    name: name,
+                    contacts: contacts,
+                    message: message
                 })
             });
             
