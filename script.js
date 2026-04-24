@@ -51,7 +51,7 @@ const projectsData = [
     {
         title: "Сайт-визитка (этот сайт)",
         desc: "Адаптив под мобильные устройства и планшеты, темная тема и рабочая форма обратной связи",
-        tech: ["HTML/CSS", "JS", "Async/JS"],
+        tech: ["HTML/CSS", "JS", "Async/JS", "Fetch API"],
         link: "GitHub",
         linkHref: "https://github.com/ivanzsgirniy-ux/portfolio1",
         icon: "fas fa-heart"
