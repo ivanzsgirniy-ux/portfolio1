@@ -30,28 +30,32 @@ const projectsData = [
         title: "Todo-лист на чистом JS",
         desc: "Мой первый рабочий проект. Добавление, удаление задач, сохранение в localStorage. Горжусь им!",
         tech: ["HTML", "CSS", "JS"],
-        link: "Ссылка на GitHub",
+        link: "GitHub",
+        linkHref: "https://github.com/ivanzsgirniy-ux/ToDo-List",
         icon: "fas fa-check-square"
     },
     {
         title: "Калькулятор",
-        desc: "Простой калькулятор с базовыми операциями. Научился работать с eval (знаю, что небезопасно, но для учебки норм)",
+        desc: "Простой калькулятор с базовыми операциями.",
         tech: ["JS", "CSS Grid"],
-        link: "Ссылка на GitHub",
+        link: "GitHub",
+        linkHref: "https://github.com/ivanzsgirniy-ux/calculator",
         icon: "fas fa-calculator"
     },
     {
         title: "Погодное приложение",
-        desc: "Использую API openweathermap. Пока в разработке, но уже показывает температуру!",
+        desc: "Использую API Open-Meteo.",
         tech: ["Fetch API", "Async/JS"],
-        link: "Ссылка на GitHub",
+        link: "GitHub",
+        linkHref: "https://github.com/ivanzsgirniy-ux/weatherApp",
         icon: "fas fa-cloud-sun"
     },
     {
         title: "Сайт-визитка (этот сайт)",
         desc: "Сделал сам, с нуля. Первый полноценный проект с адаптивом и тёмной темой.",
         tech: ["HTML/CSS", "JS"],
-        link: "Ссылка на GitHub",
+        link: "GitHub",
+        linkHref: "https://github.com/ivanzsgirniy-ux/portfolio1",
         icon: "fas fa-heart"
     }
 ];
@@ -68,7 +72,7 @@ if(projectsGrid) {
             <div class="project-content">
                 <h3 class="project-title">${project.title}</h3>
                 <p class="project-desc">${project.desc}</p>
-                <a class="project-link" href="#" target="_blank">${project.link}</a>
+                <a class="project-link" href="${project.linkHref}" target="_blank">${project.link}</a>
                 <div class="project-tech">
                     ${project.tech.map(t => `<span class="tech-tag">${t}</span>`).join('')}
                 </div>
