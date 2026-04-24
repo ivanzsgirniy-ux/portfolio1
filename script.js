@@ -16,6 +16,7 @@ function animateProgress() {
             }, 100);
         });
         animated = true;
+        window.removeEventListener('scroll', animateProgress); 
     }
 }
 
@@ -58,29 +59,128 @@ const projectsData = [
     }
 ];
 
-const projectsGrid = document.getElementById('projectsGrid');
-if(projectsGrid) {
+// Функция создания карточки проекта
+function createProjectCard(project) {
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    
+    card.innerHTML = `
+        <div class="project-img">
+            <i class="${project.icon}"></i>
+        </div>
+        <div class="project-content">
+            <h3 class="project-title">${project.title}</h3>
+            <p class="project-desc">${project.desc}</p>
+            <a class="project-link" href="${project.linkHref}" target="_blank">${project.link}</a>
+            <div class="project-tech">
+                ${project.tech.map(t => `<span class="tech-tag">${t}</span>`).join('')}
+            </div>
+        </div>
+    `;
+    
+    return card;
+}
+
+// Рендер в десктопный грид
+const projectsGridDesktop = document.getElementById('projectsGridDesktop');
+if(projectsGridDesktop) {
     projectsData.forEach(project => {
-        const card = document.createElement('div');
-        card.className = 'project-card';
-        card.innerHTML = `
-            <div class="project-img">
-                <i class="${project.icon}"></i>
-            </div>
-            <div class="project-content">
-                <h3 class="project-title">${project.title}</h3>
-                <p class="project-desc">${project.desc}</p>
-                <a class="project-link" href="${project.linkHref}" target="_blank">${project.link}</a>
-                <div class="project-tech">
-                    ${project.tech.map(t => `<span class="tech-tag">${t}</span>`).join('')}
-                </div>
-            </div>
-        `;
-        projectsGrid.appendChild(card);
+        projectsGridDesktop.appendChild(createProjectCard(project));
     });
 }
 
-// ===== ФОРМА СВЯЗИ (безопасно, через Vercel API) =====
+// Рендер в мобильный слайдер
+const swiperWrapper = document.getElementById('swiperWrapper');
+if(swiperWrapper) {
+    projectsData.forEach(project => {
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide';
+        slide.appendChild(createProjectCard(project));
+        swiperWrapper.appendChild(slide);
+    });
+    
+    // Инициализация Swiper
+    new Swiper('.mobile-slider', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            dynamicBullets: true
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+        },
+        breakpoints: {
+            // Планшеты (между 577px и 768px)
+            577: {
+                slidesPerView: 1.2,
+                spaceBetween: 20
+            },
+            // Телефоны (до 576px)
+            0: {
+                slidesPerView: 1,
+                spaceBetween: 15
+            }
+        },
+        // Плавная прокрутка
+        speed: 400,
+        // Автовысота (подстраивается под содержимое)
+        autoHeight: false,
+        // Блокировка свайпа, если тянем от края (чтобы не мешать скроллу страницы)
+        touchStartPreventDefault: false,
+        // Приятный эффект
+        grabCursor: true
+    });
+}
+
+// Функция выравнивания карточек
+function equalizeCardHeights() {
+    const slides = document.querySelectorAll('.swiper-slide');
+    if (slides.length === 0) return;
+    
+    let maxHeight = 0;
+    
+    // Сначала сбрасываем высоту
+    slides.forEach(slide => {
+        const card = slide.querySelector('.project-card');
+        if (card) {
+            card.style.height = 'auto';
+        }
+    });
+    
+    // Находим максимальную высоту
+    slides.forEach(slide => {
+        const card = slide.querySelector('.project-card');
+        if (card) {
+            const height = card.offsetHeight;
+            maxHeight = Math.max(maxHeight, height);
+        }
+    });
+    
+    // Устанавливаем одинаковую высоту
+    slides.forEach(slide => {
+        const card = slide.querySelector('.project-card');
+        if (card) {
+            card.style.height = maxHeight + 'px';
+        }
+    });
+}
+
+// Запускаем после загрузки
+window.addEventListener('load', equalizeCardHeights);
+// Запускаем после изменения ориентации экрана
+window.addEventListener('resize', equalizeCardHeights);
+// Для Swiper — после смены слайда (если нужно)
+if (typeof Swiper !== 'undefined') {
+    const swiperInstance = document.querySelector('.mobile-slider')?.swiper;
+    if (swiperInstance) {
+        swiperInstance.on('slideChange', equalizeCardHeights);
+    }
+}
+
+// ФОРМА СВЯЗИ (безопасно, через Vercel API)
 const API_URL = 'https://telegram-bot-rose-psi.vercel.app/api/send';
 const form = document.getElementById('contactForm');
 const feedbackDiv = document.getElementById('formFeedback');
@@ -139,7 +239,7 @@ if(yearSpan) {
     yearSpan.textContent = new Date().getFullYear();
 }
 
-// ===== ТЕМНАЯ ТЕМА =====
+// ТЕМНАЯ ТЕМА
 (function() {
     const themeToggle = document.createElement('div');
     themeToggle.className = 'theme-toggle';

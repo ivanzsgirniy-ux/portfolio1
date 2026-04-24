@@ -164,12 +164,6 @@ body.dark-mode .social-links h3 {
     box-shadow: 0 12px 28px rgba(0,0,0,0.3);
 }
 
-.theme-toggle i {
-    font-size: 28px;
-    color: #333e52;
-    transition: 0.2s;
-}
-
 /* Темная тема для кнопки */
 body.dark-mode .theme-toggle {
     background: linear-gradient(145deg, #1f2a3c, #141c28);
@@ -228,4 +222,22 @@ body * {
 /* Плавное появление иконки при переключении */
 .theme-toggle i {
     transition: all 0.3s ease;
+}
+/* Стили Swiper для тёмной темы */
+body.dark-mode .swiper-pagination-bullet {
+    background: #cbd5e6;
+}
+
+body.dark-mode .swiper-pagination-bullet-active {
+    background: #667eea;
+}
+
+body.dark-mode .swiper-button-prev,
+body.dark-mode .swiper-button-next {
+    color: #cbd5e6;
+}
+
+body.dark-mode .swiper-button-prev:hover,
+body.dark-mode .swiper-button-next:hover {
+    color: #667eea;
 }
