@@ -173,13 +173,9 @@ window.addEventListener('load', equalizeCardHeights);
 // Запускаем после изменения ориентации экрана
 window.addEventListener('resize', equalizeCardHeights);
 // Для Swiper — после смены слайда (если нужно)
+// Для Swiper — после смены слайда (выравниваем высоту карточек)
 if (typeof Swiper !== 'undefined') {
-    if (typeof Swiper !== 'undefined') {
-        const swiperInstance = document.querySelector('.mobile-slider')?.swiper;
-        if (swiperInstance) {
-            swiperInstance.on('slideChange', equalizeCardHeights);
-    }
-}
+    const swiperInstance = document.querySelector('.mobile-slider')?.swiper;
     if (swiperInstance) {
         swiperInstance.on('slideChange', equalizeCardHeights);
     }
@@ -246,23 +242,28 @@ if(yearSpan) {
 
 // ТЕМНАЯ ТЕМА
 (function() {
-    const themeToggle = document.createElement('div');
-    themeToggle.className = 'theme-toggle';
-    themeToggle.setAttribute('aria-label', 'Сменить тему');
-    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-    document.body.appendChild(themeToggle);
+    // Используем существующую кнопку из HTML
+    const themeToggle = document.getElementById('darkModeToggle');
+    if (!themeToggle) {
+        console.error('Кнопка переключения темы не найдена');
+        return;
+    }
     
     const icon = themeToggle.querySelector('i');
     
     function setTheme(theme) {
         if (theme === 'dark') {
             document.body.classList.add('dark-mode');
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
+            if (icon) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
         } else {
             document.body.classList.remove('dark-mode');
-            icon.classList.remove('fa-sun');
-            icon.classList.add('fa-moon');
+            if (icon) {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
         }
         localStorage.setItem('portfolioTheme', theme);
     }
@@ -271,6 +272,7 @@ if(yearSpan) {
     setTheme(savedTheme === 'dark' ? 'dark' : 'light');
     
     themeToggle.addEventListener('click', () => {
-        setTheme(document.body.classList.contains('dark-mode') ? 'light' : 'dark');
+        const newTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+        setTheme(newTheme);
     });
 })();
