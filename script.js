@@ -84,37 +84,67 @@ if(projectsGrid) {
 
 // Формa
 
+// НАСТРОЙКИ (замените на свои данные!)
+const TELEGRAM_BOT_TOKEN = '8627657486:AAHH1zYlXhFiMSK6qUG-gjpCZiyr0WkVp_c';
+const TELEGRAM_CHAT_ID = '1015432778';
+
 const form = document.getElementById('contactForm');
 const feedbackDiv = document.getElementById('formFeedback');
 
 if(form) {
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
+        
         const name = document.getElementById('userName').value.trim();
-        const email = document.getElementById('userContacts').value.trim(); // ⚠️ ВАЖНО: в вашей разметке id="userContacts", а не "userEmail"
+        const contacts = document.getElementById('userContacts').value.trim();
         const message = document.getElementById('userMessage').value.trim();
         
-        if(!name || !email) {
-            feedbackDiv.innerHTML = '<span style="color: #e94560;">❌ Пожалуйста, заполните имя и контактуню информацию!</span>';
+        if(!name || !contacts) {
+            feedbackDiv.innerHTML = '<span style="color: #e94560;">❌ Пожалуйста, заполните имя и контактную информацию!</span>';
             return;
         }
         
-        // Имитируем отправку
         const submitBtn = form.querySelector('.submit-btn');
         const originalText = submitBtn.innerHTML;
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Отправка...';
         submitBtn.disabled = true;
         
-        setTimeout(() => {
-            feedbackDiv.innerHTML = '<span style="color: #10b981;">✅ Спасибо! Я скоро свяжусь с вами. Обещаю! 🤝</span>';
-            form.reset();
+        try {
+            // Формируем сообщение для Телеграм
+            const text = `📩 НОВОЕ СООБЩЕНИЕ С САЙТА!\n\n👤 Имя: ${name}\n📞 Контакты: ${contacts}\n💬 Сообщение: ${message || 'Не указано'}`;
+            
+            // Отправляем в Телеграм (без бэкенда!)
+            const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CHAT_ID,
+                    text: text,
+                    parse_mode: 'HTML'
+                })
+            });
+            
+            const result = await response.json();
+            
+            if(result.ok) {
+                feedbackDiv.innerHTML = '<span style="color: #10b981;">✅ Сообщение отправлено! Я скоро свяжусь с вами 🤝</span>';
+                form.reset();
+            } else {
+                feedbackDiv.innerHTML = '<span style="color: #e94560;">❌ Ошибка отправки. Попробуйте позже!</span>';
+            }
+        } catch (error) {
+            console.error('Ошибка:', error);
+            feedbackDiv.innerHTML = '<span style="color: #e94560;">❌ Ошибка отправки. Попробуйте позже или напишите напрямую в соцсети!</span>';
+        } finally {
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
             
             setTimeout(() => {
                 feedbackDiv.innerHTML = '';
             }, 5000);
-        }, 1500);
+        }
     });
 }
 
