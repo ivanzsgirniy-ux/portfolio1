@@ -174,7 +174,12 @@ window.addEventListener('load', equalizeCardHeights);
 window.addEventListener('resize', equalizeCardHeights);
 // Для Swiper — после смены слайда (если нужно)
 if (typeof Swiper !== 'undefined') {
-    const swiperInstance = document.querySelector('.mobile-slider')?.swiper;
+    if (typeof Swiper !== 'undefined') {
+        const swiperInstance = document.querySelector('.mobile-slider')?.swiper;
+        if (swiperInstance) {
+            swiperInstance.on('slideChange', equalizeCardHeights);
+    }
+}
     if (swiperInstance) {
         swiperInstance.on('slideChange', equalizeCardHeights);
     }
