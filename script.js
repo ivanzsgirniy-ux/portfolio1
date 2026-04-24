@@ -51,7 +51,7 @@ const projectsData = [
     {
         title: "Сайт-визитка (этот сайт)",
         desc: "Сделал сам, с нуля. Первый полноценный проект с адаптивом и тёмной темой.",
-        tech: ["HTML/CSS", "JS"],
+        tech: ["HTML/CSS", "JS", "Async/JS"],
         link: "GitHub",
         linkHref: "https://github.com/ivanzsgirniy-ux/portfolio1",
         icon: "fas fa-heart"
