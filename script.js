@@ -1,5 +1,4 @@
 // Шкала скилов
-
 const progressBars = document.querySelectorAll('.progress');
 let animated = false;
 
@@ -24,7 +23,6 @@ window.addEventListener('scroll', animateProgress);
 animateProgress();
 
 // Секция портфолио
-
 const projectsData = [
     {
         title: "Todo-лист на чистом JS",
@@ -82,16 +80,10 @@ if(projectsGrid) {
     });
 }
 
-// Формa
-
+// ===== ФОРМА СВЯЗИ (безопасно, через Vercel API) =====
+const API_URL = 'https://telegram-bot-rose-psi.vercel.app/api/send';
 const form = document.getElementById('contactForm');
 const feedbackDiv = document.getElementById('formFeedback');
-
-// Публичный прокси (никаких секретов в коде нет)
-// Замените URL на любой рабочий прокси из списка
-const PROXY_URL = 'https://proxy-tele.12bay.workers.dev';
-const BOT_TOKEN = '8627657486:AAHH-eTrv5XsyOaEFJZzYj6348V0UE5fsqc';
-const CHAT_ID = '1015432778';
 
 if(form) {
     form.addEventListener('submit', async function(e) {
@@ -112,26 +104,27 @@ if(form) {
         submitBtn.disabled = true;
         
         try {
-            // Используем публичный прокси [citation:1][citation:9]
-            const response = await fetch(`${PROXY_URL}/bot${BOT_TOKEN}/sendMessage`, {
+            const response = await fetch(API_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: CHAT_ID,
-                    text: `📩 НОВОЕ СООБЩЕНИЕ!\n\n👤 Имя: ${name}\n📞 Контакты: ${contacts}\n💬 Сообщение: ${message || 'Не указано'}`
+                body: JSON.stringify({ 
+                    name: name, 
+                    contacts: contacts, 
+                    message: message || '—' 
                 })
             });
             
             const result = await response.json();
             
-            if(result.ok) {
-                feedbackDiv.innerHTML = '<span style="color: #10b981;">✅ Отправлено!</span>';
+            if(result.success) {
+                feedbackDiv.innerHTML = '<span style="color: #10b981;">✅ Сообщение отправлено! Я скоро свяжусь с вами 🤝</span>';
                 form.reset();
             } else {
-                throw new Error();
+                throw new Error(result.error || 'Ошибка');
             }
         } catch (error) {
-            feedbackDiv.innerHTML = '<span style="color: #e94560;">❌ Ошибка. Напишите мне напрямую в Telegram: @despamm</span>';
+            console.error('Ошибка:', error);
+            feedbackDiv.innerHTML = '<span style="color: #e94560;">❌ Ошибка отправки. Напишите мне напрямую в Telegram: @despamm</span>';
         } finally {
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
@@ -140,7 +133,7 @@ if(form) {
     });
 }
 
-// футер
+// Футер
 const yearSpan = document.getElementById('currentYear');
 if(yearSpan) {
     yearSpan.textContent = new Date().getFullYear();
@@ -148,7 +141,6 @@ if(yearSpan) {
 
 // ===== ТЕМНАЯ ТЕМА =====
 (function() {
-    // Создаем кнопку переключения темы
     const themeToggle = document.createElement('div');
     themeToggle.className = 'theme-toggle';
     themeToggle.setAttribute('aria-label', 'Сменить тему');
@@ -157,7 +149,6 @@ if(yearSpan) {
     
     const icon = themeToggle.querySelector('i');
     
-    // Функция установки темы
     function setTheme(theme) {
         if (theme === 'dark') {
             document.body.classList.add('dark-mode');
@@ -171,20 +162,10 @@ if(yearSpan) {
         localStorage.setItem('portfolioTheme', theme);
     }
     
-    // Проверяем сохраненную тему
     const savedTheme = localStorage.getItem('portfolioTheme');
-    if (savedTheme === 'dark') {
-        setTheme('dark');
-    } else {
-        setTheme('light');
-    }
+    setTheme(savedTheme === 'dark' ? 'dark' : 'light');
     
-    // Обработчик клика по кнопке
     themeToggle.addEventListener('click', () => {
-        if (document.body.classList.contains('dark-mode')) {
-            setTheme('light');
-        } else {
-            setTheme('dark');
-        }
+        setTheme(document.body.classList.contains('dark-mode') ? 'light' : 'dark');
     });
 })();
