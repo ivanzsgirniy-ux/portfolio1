@@ -181,6 +181,79 @@ if (typeof Swiper !== 'undefined') {
     }
 }
 
+
+// ===== ЭФФЕКТ ПЕЧАТНОЙ МАШИНКИ ДЛЯ ЗАГОЛОВКА И ПОДЗАГОЛОВКА =====
+(function() {
+    const titleElement = document.getElementById('typingTitle');
+    const subtitleElement = document.getElementById('typingSubtitle');
+    let cursorTitle = document.getElementById('cursorTitle');
+    let cursorSubtitle = document.getElementById('cursorSubtitle');
+    
+    if (!titleElement || !subtitleElement) return;
+    
+    const fullTitle = 'Привет, я Иван!';
+    const fullSubtitle = 'Начинающий фронтенд-разработчик, который очень старается';
+    
+    let titleIndex = 0;
+    let subtitleIndex = 0;
+    
+    // Сохраняем родителя и удаляем курсор подзаголовка из DOM
+    let cursorSubtitleParent = null;
+    if (cursorSubtitle) {
+        cursorSubtitleParent = cursorSubtitle.parentNode;
+        cursorSubtitle.remove();
+        cursorSubtitle = null;
+    }
+    
+    // Функция скрытия курсора (полностью удаляем)
+    function hideCursor(cursorElement) {
+        if (cursorElement && cursorElement.parentNode) {
+            cursorElement.remove();
+        }
+    }
+    
+    // Функция печати заголовка
+    function typeTitle() {
+        if (titleIndex < fullTitle.length) {
+            titleElement.textContent += fullTitle.charAt(titleIndex);
+            titleIndex++;
+            setTimeout(typeTitle, 80);
+        } else {
+            // Заголовок напечатан → удаляем курсор заголовка
+            hideCursor(cursorTitle);
+            cursorTitle = null;
+            
+            // Возвращаем курсор подзаголовка в DOM
+            if (cursorSubtitleParent && !document.getElementById('cursorSubtitle')) {
+                const newCursor = document.createElement('span');
+                newCursor.id = 'cursorSubtitle';
+                newCursor.className = 'cursor cursor-subtitle';
+                newCursor.textContent = '|';
+                cursorSubtitleParent.appendChild(newCursor);
+                cursorSubtitle = newCursor;
+            }
+            
+            setTimeout(typeSubtitle, 200);
+        }
+    }
+    
+    // Функция печати подзаголовка
+    function typeSubtitle() {
+        if (subtitleIndex < fullSubtitle.length) {
+            subtitleElement.textContent += fullSubtitle.charAt(subtitleIndex);
+            subtitleIndex++;
+            setTimeout(typeSubtitle, 50);
+        } else {
+            // Подзаголовок напечатан → удаляем курсор подзаголовка
+            hideCursor(cursorSubtitle);
+            cursorSubtitle = null;
+        }
+    }
+    
+    // Запускаем печать заголовка
+    typeTitle();
+})();
+
 // ФОРМА СВЯЗИ (безопасно, через Vercel API)
 const API_URL = 'https://telegram-bot-rose-psi.vercel.app/api/send';
 const form = document.getElementById('contactForm');

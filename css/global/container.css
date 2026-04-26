@@ -5,6 +5,21 @@
     padding: 10px 64px;
     background: #dfe7f8;
     border-radius: 10px;
+    box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease;
+}
+
+.container:hover {
+    box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.2);
+}
+
+/* Тёмная тема */
+body.dark-mode .container {
+    box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .container:hover {
+    box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.5);
 }
 
 @media (max-width: 768px) {

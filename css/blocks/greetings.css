@@ -74,18 +74,20 @@
 .greetings__link::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
     border-radius: 14px;
     background: linear-gradient(135deg, #dfe7f8 0%, #addeeb 100%);
-    transition: width 0.6s ease;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s ease;
     z-index: -1;
 }
 
 .greetings__link:hover::before {
-    width: 100%;
+    transform: scaleX(1);
 }
 
 .greetings__link:hover {
@@ -138,6 +140,63 @@
     box-shadow: 0 0 30px rgba(173, 222, 235, 0.3);
 }
 
+/* Контейнер для текста и курсора */
+.greetings__text-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Мигающий курсор */
+.cursor {
+    display: inline-block;
+    width: 3px;
+    background-color: #dfe7f8;
+    font-size: 24px;
+    font-weight: 300;
+    animation: blink 0.8s step-end infinite;
+}
+
+/* Общие стили для контейнеров заголовка и подзаголовка */
+.greetings__title-wrapper,
+.greetings__subtitle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+/* Курсор для заголовка */
+.cursor-title {
+    font-size: 50px;
+    font-weight: 300;
+    line-height: 1;
+    animation: blink 0.8s step-end infinite;
+}
+
+/* Курсор для подзаголовка */
+.cursor-subtitle {
+    font-size: 24px;
+    font-weight: 300;
+    animation: blink 0.8s step-end infinite;
+}
+
+/* Тёмная тема */
+body.dark-mode .cursor-title,
+body.dark-mode .cursor-subtitle {
+    color: #cbd5e6;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Тёмная тема для курсора */
+body.dark-mode .cursor {
+    background-color: #cbd5e6;
+}
+
 /* Анимация перелива градиента */
 @keyframes gradientShift {
     0% {
@@ -157,6 +216,14 @@
     }
     .title {
         line-height: 55px;
+    }
+
+    .greetings__text-wrapper {
+        flex-wrap: wrap;
+    }
+
+    .cursor {
+        font-size: 18px;
     }
 
     .greetings__links-wrap {

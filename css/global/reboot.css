@@ -1,5 +1,9 @@
 * {
   box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 body {
@@ -29,4 +33,31 @@ button {
 
 html {
   scroll-behavior: smooth;
+}
+
+button,
+a,
+div[class*="btn"],
+.theme-toggle,
+.greetings__link,
+.project-link,
+.submit-btn {
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+}
+
+/* Для всех интерактивных элементов (если лень перечислять) */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.about-info__text,
+.project-desc,
+.feedback .section-title,
+input,
+textarea {
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
 }
